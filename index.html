@@ -7,57 +7,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Countdown</title>
   <style>
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body{
-  padding: 2rem;
-}
-
-.container{
-  width: calc(18vw + 1rem);
-}
-
-    ul li{
-      list-style-type: none;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    .dialpads{
-      display: flex;
-      gap: 1rem;
-    }
-    .dialpads ul {
-      outline: 1px solid black;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+    body {
+      padding: 2rem;
     }
 
-    .dialpads li{
-      cursor: pointer;
-      width: 3vw;
-      text-align: center;
-      font-weight: bold;
-      outline: 1px solid black;
+    .container {
+      width: calc(18vw + 1rem);
     }
 
-    .dialpads li:last-child{
-      width: 100%;
+    input[type="number"]{
+      width: 5rem;
+      height: 2rem;
+      font-size: 1.5rem;
+      margin-left: 5rem;
     }
 
-    .time-display{
+    .time-display {
       font-size: 3rem;
       font-weight: bold;
       padding: 0.5rem;
       text-align: center;
     }
 
-    input:focus{
-    outline: none;
-}
+    input:focus {
+      outline: none;
+    }
 
-    #text{
+    #text {
       font-size: 1rem;
       width: calc(18vw + 1rem);
       border: none;
@@ -65,13 +47,13 @@ body{
       padding: 0.2rem;
     }
 
-    .buttons{
+    .buttons {
       padding-top: 1rem;
       display: flex;
       justify-content: space-between;
     }
 
-    .buttons div{
+    .buttons div {
       background-color: lightgrey;
       padding: 1rem;
       font-weight: bold;
@@ -82,34 +64,12 @@ body{
 
 <body>
   <div class="container">
-    <div class="dialpads">
-      <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-        <li>7</li>
-        <li>8</li>
-        <li>9</li>
-        <li>0</li>
-      </ul>
-      <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-        <li>7</li>
-        <li>8</li>
-        <li>9</li>
-        <li>0</li>
-      </ul>
+    <div class="inputs">
+      <input type="number" id="min-input">
+      <input type="number" id="sec-input">
     </div>
     <div class="time-display">
-      <span id="mins">x</span>&nbsp;mins&nbsp;:&nbsp;<span id="secs">x</span>&nbsp;secs
+      <span id="mins">0</span>&nbsp;mins&nbsp;:&nbsp;<span id="secs">0</span>&nbsp;secs
     </div>
     <input type="text" id="text">
     <div class="buttons">
@@ -119,10 +79,23 @@ body{
   </div>
 
   <script>
-    const dialpads = document.querySelector(".dialpads");
-    dialpads.addEventListener("click",(e)=>{
-      console.log(Number(e.target.innerText))
+    const minInput = document.querySelector("#min-input");
+    const secInput = document.querySelector("#sec-input");
+    const mins = document.querySelector("#mins");
+    const secs = document.querySelector("#secs");
+
+    
+
+    minInput.addEventListener("change",()=>{
+      mins.innerText = minInput.value;
     })
+
+    secInput.addEventListener("change",()=>{
+      secs.innerText = secInput.value;
+    })
+
+    
+
   </script>
 </body>
 
