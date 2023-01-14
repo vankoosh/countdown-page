@@ -78,11 +78,23 @@
     </div>
   </div>
 
+  <!-- 
+    take value from input field
+    feed it into function that updates html element
+    execute function on start button click
+   -->
+
   <script>
     const minInput = document.querySelector("#min-input");
     const secInput = document.querySelector("#sec-input");
     const mins = document.querySelector("#mins");
-    const secs = document.querySelector("#secs");    
+    const secs = document.querySelector("#secs");
+    
+    function cd(time){
+      const countdown = setInterval(()=>{
+        
+      },1000)
+    }
 
     minInput.addEventListener("change",()=>{
       mins.innerText = minInput.value;
