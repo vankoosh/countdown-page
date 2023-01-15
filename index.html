@@ -65,43 +65,53 @@
 <body>
   <div class="container">
     <div class="inputs">
-      <input type="number" id="min-input">
-      <input type="number" id="sec-input">
+      <input type="number" id="min-input">Mins:
+      <input type="number" id="sec-input">Secs:
     </div>
     <div class="time-display">
       <span id="mins">0</span>&nbsp;mins&nbsp;:&nbsp;<span id="secs">0</span>&nbsp;secs
     </div>
     <input type="text" id="text">
     <div class="buttons">
-      <div class="btn-start">START</div>
-      <div class="btn-reset">RESET</div>
+      <div class="btn-start" onclick="start()">START</div>
+      <div class="btn-reset" onclick="reset()">RESET</div>
     </div>
   </div>
 
-  <!-- 
-    take value from input field
-    feed it into function that updates html element
-    execute function on start button click
-   -->
-
   <script>
+
+    //take value from input field
+    //feed it into function that updates html element
+    //execute function on start button click
     const minInput = document.querySelector("#min-input");
     const secInput = document.querySelector("#sec-input");
     const mins = document.querySelector("#mins");
     const secs = document.querySelector("#secs");
+
+    let tsecs = 0;
+    let tmins = 0;
     
-    function cd(time){
+    function start(){
       const countdown = setInterval(()=>{
-        
+        console.log(tsecs, tmins)
+        //each sec, -1 from tsecs
+        //mins.innerText = tsecs %60
+        //secs
       },1000)
     }
 
-    minInput.addEventListener("change",()=>{
-      mins.innerText = minInput.value;
+    minInput.addEventListener("change",(e)=>{
+      tmins = Number(e.currentTarget.value);
+      console.log(tmins)
+      mins.innerText = tmins;
     })
 
-    secInput.addEventListener("change",()=>{
-      secs.innerText = secInput.value;
+    secInput.addEventListener("change",(e)=>{
+      while (tsecs < 60) {
+        tsecs = Number(e.currentTarget.value);
+        secs.innerText = tsecs
+      }
+
     })
 
     
