@@ -21,7 +21,7 @@
       width: calc(18vw + 1rem);
     }
 
-    input[type="number"]{
+    input[type="number"] {
       width: 5rem;
       height: 2rem;
       font-size: 1.5rem;
@@ -65,8 +65,10 @@
 <body>
   <div class="container">
     <div class="inputs">
-      <input type="number" id="min-input">Mins:
-      <input type="number" id="sec-input">Secs:
+      <input type="range" id="min-input" min="0" max="59" value="0" >
+      <label for=""min-input>Minutes</label>
+      <input type="range" id="sec-input" min="0" max="59" value="0">
+      <label for="" sec-input>Seconds</label>
     </div>
     <div class="time-display">
       <span id="mins">0</span>&nbsp;mins&nbsp;:&nbsp;<span id="secs">0</span>&nbsp;secs
@@ -90,32 +92,33 @@
 
     let tsecs = 0;
     let tmins = 0;
-    
-    function start(){
-      const countdown = setInterval(()=>{
-        console.log(tsecs, tmins)
-        //each sec, -1 from tsecs
-        //mins.innerText = tsecs %60
-        //secs
-      },1000)
+
+    function start() {
+      console.log("start started")
+      setInterval(() => {
+        tsecs--;
+        if(tsecs < 0){
+          console.log(tmins)
+          tmins--
+        }
+        if(tmins === 0 && tsecs === 0){
+          console.log("tmins is 0 and tsecs is 0")
+          return
+        }
+      }, 1000)
     }
 
-    minInput.addEventListener("change",(e)=>{
+    minInput.addEventListener("input", (e) => {
       tmins = Number(e.currentTarget.value);
-      console.log(tmins)
       mins.innerText = tmins;
+      console.log(tmins)
     })
 
-    secInput.addEventListener("change",(e)=>{
-      while (tsecs < 60) {
-        tsecs = Number(e.currentTarget.value);
-        secs.innerText = tsecs
-      }
-
+    secInput.addEventListener("input", (e) => {
+      tsecs = Number(e.currentTarget.value);
+      secs.innerText = tsecs;
+      console.log(tsecs)
     })
-
-    
-    
 
   </script>
 </body>
