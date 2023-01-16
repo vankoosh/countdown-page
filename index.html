@@ -65,8 +65,8 @@
 <body>
   <div class="container">
     <div class="inputs">
-      <input type="range" id="min-input" min="0" max="59" value="0" >
-      <label for=""min-input>Minutes</label>
+      <input type="number" id="min-input" min="0" max="59" value="0">
+      <label for="" min-input>Minutes</label>
       <input type="range" id="sec-input" min="0" max="59" value="0">
       <label for="" sec-input>Seconds</label>
     </div>
@@ -90,34 +90,50 @@
     const mins = document.querySelector("#mins");
     const secs = document.querySelector("#secs");
 
-    let tsecs = 0;
-    let tmins = 0;
+    let tsec = 0;
+    let tmin = 0;
+    let intId;
 
     function start() {
-      console.log("start started")
-      setInterval(() => {
-        tsecs--;
-        if(tsecs < 0){
-          console.log(tmins)
-          tmins--
-        }
-        if(tmins === 0 && tsecs === 0){
-          console.log("tmins is 0 and tsecs is 0")
-          return
+      console.log(`tmin:${tmin} , tsec:${tsec}`)
+      intId = setInterval(() => {
+        switch (true) {
+          case (tsec == 0 && tmin == 0):
+            clearInterval(intId)
+            break;
+          case (tsec == 0 && tmin > 0):
+            tmin--;
+            mins.innerText = tmin;
+            tsec = 59;
+            secs.innerText = tsec;
+            break;
+          case (tsec > 0 || tmin > 0):
+            tsec--;
+            mins.innerText = tmin;
+            secs.innerText = tsec;
+            break;
         }
       }, 1000)
     }
 
+    function reset() {
+      clearInterval(intId);
+      tsec = 0;
+      tmin = 0;
+      minInput.value = tmin;
+      secInput.value = tsec;
+      mins.innerText = tmin;
+      secs.innerText = tsec;
+    };
+
     minInput.addEventListener("input", (e) => {
-      tmins = Number(e.currentTarget.value);
-      mins.innerText = tmins;
-      console.log(tmins)
+      tmin = Number(e.currentTarget.value);
+      mins.innerText = tmin;
     })
 
     secInput.addEventListener("input", (e) => {
-      tsecs = Number(e.currentTarget.value);
-      secs.innerText = tsecs;
-      console.log(tsecs)
+      tsec = Number(e.currentTarget.value);
+      secs.innerText = tsec;
     })
 
   </script>
